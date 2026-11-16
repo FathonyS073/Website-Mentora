@@ -43,3 +43,10 @@ yarn-error.log
 /boost.json
 /opencode.json
 /opencode.jsonc
+<<<<<<< HEAD
+=======
+/.env.docker
+/opencode.json
+/opencode.jsonc
+/.env.docker
+>>>>>>> master
