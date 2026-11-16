@@ -1,0 +1,39 @@
+
+/*
+ * MENTORA Design System
+ * S0-06 — Brand Design Tokens
+ * Tailwind CSS v4
+ *
+ * Tokens are namespaced to avoid overriding
+ * Laravel Starter Kit component styles.
+ */
+
+@theme {
+    /* Brand colors */
+    --color-mentora-primary: #3035b5;
+    --color-mentora-primary-hover: #272b96;
+    --color-mentora-secondary: #5364e8;
+
+    /* Typography */
+    --color-mentora-navy: #151b35;
+    --color-mentora-muted: #64748b;
+
+    /* Backgrounds */
+    --color-mentora-lavender: #eef0ff;
+    --color-mentora-canvas: #f8faff;
+    --color-mentora-white: #ffffff;
+
+    /* Borders */
+    --color-mentora-border: #e5e9f4;
+
+    /* Feedback */
+    --color-mentora-success: #15803d;
+    --color-mentora-danger: #dc2626;
+
+    /* Shape */
+    --radius-mentora-card: 1rem;
+
+    /* Elevation */
+    --shadow-mentora-card:
+        0 6px 24px rgb(21 27 53 / 0.06);
+}
