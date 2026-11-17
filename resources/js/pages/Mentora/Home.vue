@@ -142,20 +142,20 @@ function toggleFaq(index: number): void {
         <!-- Hero: visual mengikuti LP EdTech MENTORA Modern, bukan Starter Kit Laravel. -->
         <section class="relative overflow-hidden bg-gradient-to-b from-mentora-canvas via-[#f7f8ff] to-white">
             <div class="pointer-events-none absolute -right-24 top-12 hidden size-[34rem] rounded-full bg-mentora-lavender/70 blur-3xl lg:block" aria-hidden="true" />
-            <div class="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-5 pb-12 pt-10 md:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-4 lg:pb-8 lg:pt-16">
+            <div class="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-5 pb-12 pt-10 md:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-4 lg:pb-8 lg:pt-16 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] xl:gap-6 xl:pb-4 xl:pt-12">
                 <div class="relative z-10 max-w-2xl">
-                    <span class="inline-flex items-center rounded-full bg-mentora-lavender px-4 py-2 text-xs font-semibold text-mentora-primary">
+                    <span class="inline-flex items-center rounded-full bg-mentora-lavender px-4 py-2 text-xs font-semibold text-mentora-primary xl:py-1.5">
                         Platform Pendamping Studi &amp; Beasiswa
                     </span>
-                    <h1 class="mt-5 text-[clamp(2.45rem,5vw,4.3rem)] font-extrabold leading-[1.09] tracking-[-0.04em] text-mentora-navy">
+                    <h1 class="mt-5 text-[clamp(2.45rem,5vw,4.3rem)] font-extrabold leading-[1.09] tracking-[-0.04em] text-mentora-navy xl:mt-4 xl:text-[3.1rem] xl:leading-[1.08] xl:tracking-[-0.035em]">
                         Temukan Beasiswa,<br class="hidden xl:block" /> Kembangkan Potensi,<br />
                         <span class="text-mentora-primary">Raih Masa Depanmu.</span>
                     </h1>
-                    <p class="mt-5 max-w-xl text-base leading-7 text-mentora-muted sm:text-lg">
+                    <p class="mt-5 max-w-xl text-base leading-7 text-mentora-muted sm:text-lg xl:mt-4 xl:max-w-[560px] xl:text-base xl:leading-6">
                         MENTORA membantu pelajar dan mahasiswa dari SD/MI hingga S3 menemukan peluang beasiswa,
                         memahami persyaratan, mempersiapkan seleksi, dan mengelola pendaftaran.
                     </p>
-                    <div class="mt-7 flex flex-wrap items-center gap-3">
+                    <div class="mt-7 flex flex-wrap items-center gap-3 xl:mt-5">
                         <Link :href="startHref" class="inline-flex min-h-12 items-center gap-2 rounded-xl bg-mentora-primary px-6 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-500/15 transition hover:bg-mentora-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary">
                             Mulai Sekarang Gratis <ArrowRight :size="17" aria-hidden="true" />
                         </Link>
@@ -164,12 +164,12 @@ function toggleFaq(index: number): void {
                         </a>
                     </div>
                 </div>
-                <div class="relative mx-auto w-full max-w-2xl lg:self-end" aria-label="Ilustrasi pelajar dan mahasiswa MENTORA">
-                    <div class="pointer-events-none absolute inset-x-8 top-8 h-3/4 rounded-[48%] bg-gradient-to-br from-[#e6e9ff] to-[#f1f3ff]" aria-hidden="true" />
+                <div class="relative mx-auto w-full max-w-2xl lg:self-end xl:max-w-none xl:translate-x-3" aria-label="Ilustrasi pelajar dan mahasiswa MENTORA">
+                    <div class="pointer-events-none absolute inset-x-8 top-8 h-3/4 rounded-[48%] bg-gradient-to-br from-[#e6e9ff] to-[#f1f3ff] xl:hidden" aria-hidden="true" />
                     <img
                         src="/Images/Hero-Section.webp"
                         alt="Pelajar dan mahasiswa yang membawa perlengkapan studi"
-                        class="relative mx-auto block max-h-[440px] w-full object-contain object-bottom"
+                        class="relative mx-auto block max-h-[440px] w-full object-contain object-bottom xl:max-h-[420px] xl:w-[108%] xl:max-w-none"
                         loading="eager"
                         fetchpriority="high"
                         decoding="async"
@@ -243,11 +243,13 @@ function toggleFaq(index: number): void {
                     <p class="mt-4 text-sm leading-7 text-mentora-muted">MENTORA bukan hanya tempat menemukan informasi beasiswa, tetapi pendamping untuk membantumu mempersiapkan langkah pendidikan secara lebih terarah dan percaya diri.</p>
                 </div>
                 <div class="rounded-[1.5rem] border border-indigo-100 bg-white p-4 shadow-[0_14px_34px_rgba(53,55,151,0.12)]" aria-label="Pratinjau konsep antarmuka dashboard MENTORA">
-                    <div class="flex items-center justify-between border-b border-mentora-border pb-3"><span class="text-xs font-extrabold text-mentora-primary">M MENTORA</span><span class="rounded-full bg-mentora-lavender px-2 py-1 text-[10px] text-mentora-primary">Pratinjau Dashboard</span></div>
-                    <div class="mt-4 grid grid-cols-[80px_1fr] gap-4">
-                        <div class="space-y-3 border-r border-mentora-border pr-3"><div class="h-6 rounded-md bg-mentora-primary" /><div class="h-2 rounded-full bg-mentora-lavender" /><div class="h-2 w-10 rounded-full bg-slate-100" /><div class="h-2 w-12 rounded-full bg-slate-100" /></div>
-                        <div class="space-y-3"><div class="text-sm font-bold text-mentora-navy">Halo, selamat datang! 👋</div><div class="text-[11px] text-mentora-muted">Siapkan perjalanan beasiswamu.</div><div class="grid grid-cols-2 gap-2"><div class="rounded-xl bg-mentora-canvas p-3"><div class="mb-2 h-2 w-16 rounded bg-indigo-100" /><div class="h-2 w-11 rounded bg-indigo-200" /></div><div class="rounded-xl bg-mentora-canvas p-3"><div class="mb-2 h-2 w-14 rounded bg-indigo-100" /><div class="h-2 w-9 rounded bg-indigo-200" /></div></div><div class="h-2 w-4/5 rounded bg-slate-100" /><div class="h-2 w-3/5 rounded bg-slate-100" /></div>
-                    </div>
+                    <img
+                        src="/Images/Dashboard-Preview.webp"
+                        alt="Pratinjau konsep antarmuka dashboard MENTORA"
+                        class="mx-auto block w-full rounded-[1.25rem] object-contain object-top"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
                 <div class="space-y-6">
                     <div v-for="benefit in benefits" :key="benefit.title" class="flex gap-3"><div class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700"><Check :size="15" stroke-width="3" aria-hidden="true" /></div><div><h3 class="text-sm font-bold text-mentora-navy">{{ benefit.title }}</h3><p class="mt-1 text-xs leading-5 text-mentora-muted">{{ benefit.description }}</p></div></div>
