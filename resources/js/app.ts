@@ -19,6 +19,8 @@ void createInertiaApp({
             case name === 'Mentora/PublicLayoutPreview':
             case name === 'Mentora/Home':
             case name === 'Mentora/Scholarships/Index':
+            case name === 'Mentora/Scholarships/CardPreview':
+
                 return null;
 
             // Halaman autentikasi

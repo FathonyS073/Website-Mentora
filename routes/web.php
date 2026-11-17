@@ -17,6 +17,10 @@ if (app()->environment('local')) {
         '/ui-preview/public',
         'Mentora/PublicLayoutPreview'
     )->name('ui-preview.public');
+    Route::inertia(
+    '/ui-preview/scholarship-cards',
+    'Mentora/Scholarships/CardPreview'
+    )->name('ui-preview.scholarship-cards');
 }
 
 Route::get('/beasiswa', ScholarshipCatalogController::class)

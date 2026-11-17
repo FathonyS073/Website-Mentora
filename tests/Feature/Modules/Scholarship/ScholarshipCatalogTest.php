@@ -112,4 +112,93 @@ class ScholarshipCatalogTest extends TestCase
                 ->etc()
             );
     }
+
+    public function test_combined_filters_only_return_matching_scholarships(): void
+    {
+        $this->createScholarship('matching-program', [
+            'title' => 'Program Teknik S2',
+            'education_levels' => ['S2'],
+            'location_scope' => 'indonesia',
+            'funding_type' => 'fully_funded',
+            'fields_of_study' => ['sains-teknologi'],
+        ]);
+
+        $this->createScholarship('different-location', [
+            'education_levels' => ['S2'],
+            'location_scope' => 'international',
+            'funding_type' => 'fully_funded',
+            'fields_of_study' => ['sains-teknologi'],
+        ]);
+
+        $this->createScholarship('different-funding', [
+            'education_levels' => ['S2'],
+            'location_scope' => 'indonesia',
+            'funding_type' => 'partially_funded',
+            'fields_of_study' => ['sains-teknologi'],
+        ]);
+
+        $this->createScholarship('different-field', [
+            'education_levels' => ['S2'],
+            'location_scope' => 'indonesia',
+            'funding_type' => 'fully_funded',
+            'fields_of_study' => ['kesehatan'],
+        ]);
+
+        $this->get('/beasiswa?' . http_build_query([
+            'education_level' => 'S2',
+            'location_scope' => 'indonesia',
+            'funding_type' => 'fully_funded',
+            'field_of_study' => 'sains-teknologi',
+        ]))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Mentora/Scholarships/Index')
+                ->where('scholarships.total', 1)
+                ->has('scholarships.items', 1)
+                ->where(
+                    'scholarships.items.0.slug',
+                    'matching-program'
+                )
+                ->etc()
+            );
+    }
+
+    public function test_combined_filters_support_pagination(): void
+    {
+        for ($i = 1; $i <= 13; $i++) {
+            $this->createScholarship("matching-{$i}", [
+                'education_levels' => ['S2'],
+                'location_scope' => 'indonesia',
+                'funding_type' => 'fully_funded',
+                'fields_of_study' => ['sains-teknologi'],
+            ]);
+        }
+
+        $this->createScholarship('excluded-program', [
+            'education_levels' => ['S2'],
+            'location_scope' => 'international',
+            'funding_type' => 'fully_funded',
+            'fields_of_study' => ['sains-teknologi'],
+        ]);
+
+        $this->get('/beasiswa?' . http_build_query([
+            'education_level' => 'S2',
+            'location_scope' => 'indonesia',
+            'funding_type' => 'fully_funded',
+            'field_of_study' => 'sains-teknologi',
+            'page' => 2,
+        ]))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Mentora/Scholarships/Index')
+                ->where('scholarships.total', 13)
+                ->where('scholarships.current_page', 2)
+                ->where('scholarships.last_page', 2)
+                ->has('scholarships.items', 1)
+                ->where('filters.location_scope', 'indonesia')
+                ->where('filters.funding_type', 'fully_funded')
+                ->where('filters.field_of_study', 'sains-teknologi')
+                ->etc()
+            );
+    }
 }
