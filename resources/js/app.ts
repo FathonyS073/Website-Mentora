@@ -1,3 +1,4 @@
+
 import { createInertiaApp } from '@inertiajs/vue3';
 import { initializeTheme } from '@/composables/useAppearance';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -9,22 +10,30 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
+
     layout: (name) => {
         switch (true) {
+            // Halaman publik MENTORA
+            // Tidak menggunakan AppLayout / Sidebar
             case name === 'Welcome':
             case name === 'Mentora/PublicLayoutPreview':
+            case name === 'Mentora/Home':
                 return null;
 
+            // Halaman autentikasi
             case name.startsWith('auth/'):
                 return AuthLayout;
 
+            // Halaman pengaturan pengguna
             case name.startsWith('settings/'):
                 return [AppLayout, SettingsLayout];
 
+            // Dashboard dan halaman internal
             default:
                 return AppLayout;
         }
     },
+
     withApp: (app) => {
         app.directive('focus', {
             mounted: (el: HTMLElement, shouldFocus) => {
@@ -34,13 +43,14 @@ void createInertiaApp({
             },
         });
     },
+
     progress: {
         color: '#4B5563',
     },
 });
 
-// This will set light / dark mode on page load...
+// Initialize application theme
 initializeTheme();
 
-// This will listen for flash toast data from the server...
+// Initialize flash notifications
 initializeFlashToast();
