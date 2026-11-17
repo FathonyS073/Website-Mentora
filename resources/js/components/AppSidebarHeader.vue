@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -15,13 +16,44 @@ withDefaults(
 
 <template>
     <header
-        class="flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border/70 px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4"
+        class="sticky top-0 z-20 flex h-16 shrink-0
+               items-center justify-between
+               border-b border-mentora-border
+               bg-white/95 px-4 backdrop-blur
+               sm:px-6"
     >
-        <div class="flex items-center gap-2">
-            <SidebarTrigger class="-ml-1" />
-            <template v-if="breadcrumbs && breadcrumbs.length > 0">
-                <Breadcrumbs :breadcrumbs="breadcrumbs" />
-            </template>
+        <div class="flex min-w-0 items-center gap-3">
+            <SidebarTrigger
+                class="-ml-1 shrink-0 rounded-lg
+                       text-mentora-navy
+                       hover:bg-mentora-lavender
+                       hover:text-mentora-primary"
+            />
+
+            <div
+                class="h-6 w-px shrink-0 bg-mentora-border"
+                aria-hidden="true"
+            />
+
+            <Breadcrumbs
+                v-if="breadcrumbs.length > 0"
+                :breadcrumbs="breadcrumbs"
+            />
+
+            <span
+                v-else
+                class="truncate text-sm font-semibold
+                       text-mentora-navy"
+            >
+                Beranda
+            </span>
         </div>
+
+        <span
+            class="hidden text-xs font-medium
+                   text-mentora-muted sm:inline"
+        >
+            Platform Pendamping Studi &amp; Beasiswa
+        </span>
     </header>
 </template>
