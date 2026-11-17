@@ -9,3 +9,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__.'/settings.php';
+
+// Pratinjau UI hanya untuk lingkungan development lokal.
+if (app()->environment('local')) {
+    Route::inertia(
+        '/ui-preview/public',
+        'Mentora/PublicLayoutPreview'
+    )->name('ui-preview.public');
+}
