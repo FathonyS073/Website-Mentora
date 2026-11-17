@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, usePage } from '@inertiajs/vue3';
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import {
     ArrowRight,
@@ -29,7 +29,6 @@ const keyword = ref('');
 const level = ref('');
 const location = ref('');
 const field = ref('');
-const searchNotice = ref('');
 const activeFaq = ref<number | null>(0);
 
 const quickSearches = ['Beasiswa S1', 'Beasiswa S2', 'Beasiswa Luar Negeri', 'Fully Funded'];
@@ -116,13 +115,34 @@ const faqs = [
     },
 ];
 
+
 function runSearch(): void {
-    searchNotice.value = 'Pencarian katalog beasiswa belum tersedia pada Sprint 1 ini. Formulir ini masih merupakan pratinjau antarmuka; belum ada pencarian data yang dilakukan.';
+    const params: Record<string, string> = {};
+
+    const search = keyword.value.trim();
+
+    if (search !== '') {
+        params.search = search;
+    }
+
+    if (level.value !== '') {
+        params.education_level = level.value;
+    }
+
+    if (location.value !== '') {
+        params.location_scope = location.value;
+    }
+
+    if (field.value !== '') {
+        params.field_of_study = field.value;
+    }
+
+    router.get('/beasiswa', params);
 }
+
 
 function applyQuickSearch(term: string): void {
     keyword.value = term;
-    searchNotice.value = '';
 }
 
 function toggleFaq(index: number): void {
@@ -159,7 +179,7 @@ function toggleFaq(index: number): void {
                         <Link :href="startHref" class="inline-flex min-h-12 items-center gap-2 rounded-xl bg-mentora-primary px-6 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-500/15 transition hover:bg-mentora-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary">
                             Mulai Sekarang Gratis <ArrowRight :size="17" aria-hidden="true" />
                         </Link>
-                        <a href="#peluang-beasiswa" class="inline-flex min-h-12 items-center rounded-xl border border-mentora-primary px-6 py-3 text-sm font-semibold text-mentora-primary transition hover:bg-mentora-lavender focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary">
+                        <a href="/beasiswa" class="inline-flex min-h-12 items-center rounded-xl border border-mentora-primary px-6 py-3 text-sm font-semibold text-mentora-primary transition hover:bg-mentora-lavender focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary">
                             Jelajahi Beasiswa
                         </a>
                     </div>
@@ -193,24 +213,36 @@ function toggleFaq(index: number): void {
                         <span class="sr-only">Jenjang pendidikan</span>
                         <select v-model="level" name="level" class="h-12 w-full rounded-xl border border-mentora-border bg-white px-3 text-sm text-mentora-navy focus:border-mentora-secondary focus:outline-none focus:ring-2 focus:ring-mentora-lavender">
                             <option value="">Jenjang</option>
-                            <option value="SD/MI">SD/MI</option><option value="SMP/MTs">SMP/MTs</option><option value="SMA/SMK/MA">SMA/SMK/MA</option><option value="D3/D4">D3/D4</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
+                            <option value="SD/MI">SD/MI</option>
+                            <option value="SMP/MTs">SMP/MTs</option>
+                            <option value="SMA/MA/SMK">SMA/MA/SMK</option>
+                            <option value="D3">D3</option>
+                            <option value="D4">D4</option>
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                            <option value="S3">S3</option>
                         </select>
                     </label>
                     <label class="block">
                         <span class="sr-only">Lokasi studi</span>
                         <select v-model="location" name="location" class="h-12 w-full rounded-xl border border-mentora-border bg-white px-3 text-sm text-mentora-navy focus:border-mentora-secondary focus:outline-none focus:ring-2 focus:ring-mentora-lavender">
-                            <option value="">Lokasi</option><option value="dalam-negeri">Dalam Negeri</option><option value="luar-negeri">Luar Negeri</option>
+                            <option value="">Lokasi</option>
+                            <option value="indonesia">Dalam Negeri</option>
+                            <option value="international">Luar Negeri</option>
                         </select>
                     </label>
                     <label class="block">
                         <span class="sr-only">Bidang studi</span>
                         <select v-model="field" name="field" class="h-12 w-full rounded-xl border border-mentora-border bg-white px-3 text-sm text-mentora-navy focus:border-mentora-secondary focus:outline-none focus:ring-2 focus:ring-mentora-lavender">
-                            <option value="">Bidang Studi</option><option value="sains-teknologi">Sains &amp; Teknologi</option><option value="sosial-humaniora">Sosial &amp; Humaniora</option><option value="kesehatan">Kesehatan</option><option value="semua">Lainnya</option>
+                            <option value="">Bidang Studi</option>
+                            <option value="sains-teknologi">Sains &amp; Teknologi</option>
+                            <option value="sosial-humaniora">Sosial &amp; Humaniora</option>
+                            <option value="kesehatan">Kesehatan</option>
+                            <option value="lainnya">Lainnya</option>
                         </select>
                     </label>
                     <MentoraButton type="submit" class="min-h-12 whitespace-nowrap px-5"><Search :size="16" aria-hidden="true" /> Cari Beasiswa</MentoraButton>
                 </form>
-                <p v-if="searchNotice" class="mt-4 rounded-xl border border-mentora-border bg-mentora-lavender/60 px-4 py-3 text-sm text-mentora-navy" role="status" aria-live="polite">{{ searchNotice }}</p>
                 <div class="mt-4 flex flex-wrap items-center gap-2 text-xs">
                     <span class="mr-1 font-semibold text-mentora-navy">Pencarian cepat:</span>
                     <button v-for="item in quickSearches" :key="item" type="button" class="rounded-full bg-mentora-lavender px-3 py-1.5 font-medium text-mentora-primary transition hover:bg-indigo-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary" @click="applyQuickSearch(item)">{{ item }}</button>

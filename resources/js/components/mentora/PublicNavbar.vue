@@ -11,7 +11,7 @@ const menuOpen = ref(false);
 // S0-06: only published routes are clickable. Enable the others as their pages are built.
 const navigation = [
     { label: 'Beranda', href: '/', enabled: true },
-    { label: 'Beasiswa', href: '/beasiswa', enabled: false },
+    { label: 'Beasiswa', href: '/beasiswa', enabled: true },
     { label: 'Fitur', href: '/fitur', enabled: false },
     { label: 'Event', href: '/event', enabled: false },
     { label: 'Artikel', href: '/artikel', enabled: false },
