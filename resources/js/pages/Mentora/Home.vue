@@ -282,7 +282,7 @@ function toggleFaq(index: number): void {
         </section>
 
         <!-- Preparation features -->
-        <section class="bg-mentora-canvas/70 py-20" aria-labelledby="prepare-title">
+        <section class="bg-mentora-canvas/70 py-5" aria-labelledby="prepare-title">
             <div class="mx-auto max-w-7xl px-5 md:px-8"><div class="text-center"><h2 id="prepare-title" class="text-3xl font-extrabold tracking-tight text-mentora-navy">Persiapkan Dirimu untuk Setiap Peluang</h2><p class="mt-3 text-sm text-mentora-muted">Berbagai fitur persiapan yang membantu proses pendaftaran beasiswa lebih matang.</p></div>
                 <div class="mt-10 grid gap-5 md:grid-cols-3">
                     <MentoraCard v-for="item in preparations" :key="item.title" class="flex h-full flex-col"><div class="mb-5 flex size-12 items-center justify-center rounded-2xl bg-mentora-lavender text-mentora-primary"><component :is="item.icon" :size="24" aria-hidden="true" /></div><div class="flex flex-wrap items-center gap-2"><h3 class="font-bold text-mentora-navy">{{ item.title }}</h3><span class="rounded-full bg-mentora-lavender px-2 py-0.5 text-[10px] font-semibold text-mentora-primary">Segera Hadir</span></div><p class="mt-2 flex-1 text-sm leading-6 text-mentora-muted">{{ item.description }}</p><span class="mt-6 inline-flex w-fit rounded-lg border border-mentora-border px-4 py-2 text-xs font-semibold text-mentora-muted">Sedang disiapkan</span></MentoraCard>
