@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scholarship extends Model
 {
+    // Menghubungkan model dengan tabel scholarships.
     protected $table = 'scholarships';
 
+    // Menentukan kolom yang dapat diisi melalui Eloquent.
     protected $fillable = [
         'title',
         'slug',
@@ -26,8 +28,14 @@ class Scholarship extends Model
         'verification_status',
         'publication_status',
         'published_at',
+
+        // Kolom tambahan untuk halaman Detail Beasiswa.
+        'requirements',
+        'benefits',
+        'required_documents',
     ];
 
+    // Menentukan konversi tipe data dari database ke PHP.
     protected function casts(): array
     {
         return [
@@ -36,9 +44,18 @@ class Scholarship extends Model
             'opens_at' => 'date',
             'closes_at' => 'date',
             'published_at' => 'datetime',
+
+            // Konversi tiga kolom JSON menjadi array PHP.
+            'requirements' => 'array',
+            'benefits' => 'array',
+            'required_documents' => 'array',
         ];
     }
 
+    /**
+     * Membatasi akses publik hanya untuk beasiswa
+     * yang sudah diterbitkan dan diverifikasi.
+     */
     public function scopePubliclyVisible(Builder $query): Builder
     {
         return $query
