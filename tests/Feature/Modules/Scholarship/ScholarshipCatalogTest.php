@@ -10,7 +10,6 @@ use Tests\TestCase;
 class ScholarshipCatalogTest extends TestCase
 {
     use RefreshDatabase;
-
     private function createScholarship(
         string $slug,
         array $overrides = []
