@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipCatalogController;
+use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipDetailController;
+
 
 Route::inertia('/', 'Mentora/Home')->name('home');
 
@@ -25,3 +27,7 @@ if (app()->environment('local')) {
 
 Route::get('/beasiswa', ScholarshipCatalogController::class)
     ->name('scholarships.index');
+
+    // Halaman detail beasiswa untuk pengunjung publik.
+Route::get('/beasiswa/{slug}', ScholarshipDetailController::class)
+    ->name('scholarships.show');
