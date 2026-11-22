@@ -48,8 +48,9 @@ const modeLabel = computed(() =>
     modeLabels[props.event.delivery_mode] ?? props.event.delivery_mode
 );
 
-const detailUrl = computed(() =>
-    `/event/${encodeURIComponent(props.event.slug)}`
+const detailUrl = computed(() => props.preview
+    ? `/ui-preview/event-detail/${encodeURIComponent(props.event.slug)}`
+    : `/event/${encodeURIComponent(props.event.slug)}`
 );
 
 function formatStart(value: string): string {
@@ -112,20 +113,14 @@ function formatStart(value: string): string {
             </div>
 
             <Link
-                v-if="!preview"
                 :href="detailUrl"
                 :aria-label="`Lihat detail event ${event.title}`"
                 class="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-mentora-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-mentora-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary"
             >
-                Lihat Detail Event
+                {{ preview ? 'Detail Contoh' : 'Lihat Detail Event' }}
                 <ArrowRight :size="17" aria-hidden="true" />
             </Link>
-            <div
-                v-else
-                class="mt-5 rounded-xl border border-dashed border-indigo-200 px-4 py-3 text-center text-xs font-semibold text-mentora-primary"
-            >
-                Pratinjau desain — bukan event nyata
-            </div>
+
         </div>
     </article>
 </template>

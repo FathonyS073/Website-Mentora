@@ -98,6 +98,72 @@ Route::get('/ui-preview/scholarship-detail', function () {
         '/ui-preview/event-cards',
         'Mentora/Events/CardPreview'
     )->name('ui-preview.event-cards');
+    // Khusus local: contoh detail Event, tanpa menulis ke database.
+Route::get('/ui-preview/event-detail/{sample}', function (string $sample) {
+    $samples = [
+        'preview-event-webinar' => [
+            'id' => -1,
+            'title' => '[CONTOH] Webinar Strategi Mencari Beasiswa',
+            'slug' => 'preview-event-webinar',
+            'organizer_name' => 'Penyelenggara Contoh A',
+            'summary' => 'Webinar demonstrasi untuk memeriksa tampilan informasi dan jadwal.',
+            'description' => "Ini adalah uraian contoh halaman detail webinar MENTORA.\nInformasi ini bukan kegiatan nyata atau undangan pendaftaran.",
+            'event_type' => 'webinar',
+            'delivery_mode' => 'online',
+            'location_name' => null,
+            'timezone' => 'Asia/Jakarta',
+            'starts_at' => '2027-01-15T02:00:00.000Z',
+            'ends_at' => '2027-01-15T04:00:00.000Z',
+            'registration_closes_at' => '2027-01-14T16:59:00.000Z',
+            'source_url' => null,
+            'registration_url' => null,
+            'cover_image_path' => null,
+        ],
+        'preview-event-workshop' => [
+            'id' => -2,
+            'title' => '[CONTOH] Workshop Persiapan Dokumen Beasiswa',
+            'slug' => 'preview-event-workshop',
+            'organizer_name' => 'Penyelenggara Contoh B',
+            'summary' => 'Workshop contoh untuk menguji tampilan kegiatan tatap muka.',
+            'description' => 'Konten demonstrasi untuk memeriksa lokasi, metode, dan informasi pendaftaran workshop.',
+            'event_type' => 'workshop',
+            'delivery_mode' => 'offline',
+            'location_name' => 'Lokasi contoh, Indonesia',
+            'timezone' => 'Asia/Jakarta',
+            'starts_at' => '2027-01-22T06:00:00.000Z',
+            'ends_at' => '2027-01-22T09:00:00.000Z',
+            'registration_closes_at' => '2027-01-21T16:59:00.000Z',
+            'source_url' => null,
+            'registration_url' => null,
+            'cover_image_path' => null,
+        ],
+        'preview-event-seminar' => [
+            'id' => -3,
+            'title' => '[CONTOH] Seminar Pendidikan dan Peluang Studi',
+            'slug' => 'preview-event-seminar',
+            'organizer_name' => 'Penyelenggara Contoh C',
+            'summary' => 'Seminar contoh untuk memeriksa informasi kegiatan hybrid.',
+            'description' => 'Informasi demonstrasi untuk pengujian halaman detail dan konsistensi desain MENTORA.',
+            'event_type' => 'seminar',
+            'delivery_mode' => 'hybrid',
+            'location_name' => 'Lokasi demonstrasi',
+            'timezone' => 'Asia/Jakarta',
+            'starts_at' => '2027-02-05T01:30:00.000Z',
+            'ends_at' => '2027-02-05T04:00:00.000Z',
+            'registration_closes_at' => '2027-02-04T16:59:00.000Z',
+            'source_url' => null,
+            'registration_url' => null,
+            'cover_image_path' => null,
+        ],
+    ];
+
+    abort_unless(array_key_exists($sample, $samples), 404);
+
+    return \Inertia\Inertia::render('Mentora/Events/Show', [
+        'event' => $samples[$sample],
+        'preview' => true,
+    ]);
+})->name('ui-preview.event-detail');
 } // Akhir blok route preview khusus local.
 
 
