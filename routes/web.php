@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipCatalogController;
 use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipDetailController;
+use App\Modules\Event\Presentation\Http\Controllers\EventCatalogController;
+use App\Modules\Event\Presentation\Http\Controllers\EventDetailController;
 
 
 Route::inertia('/', 'Mentora/Home')->name('home');
@@ -33,9 +35,6 @@ if (app()->environment('local')) {
 
     // Route preview detail beasiswa yang sudah ada
     // harus berada di dalam blok ini.
-
-
-
 /**
  * Preview lokal halaman Detail Beasiswa.
  *
@@ -95,6 +94,10 @@ Route::get('/ui-preview/scholarship-detail', function () {
         ]
     );
 })->name('ui-preview.scholarship-detail');
+    Route::inertia(
+        '/ui-preview/event-cards',
+        'Mentora/Events/CardPreview'
+    )->name('ui-preview.event-cards');
 } // Akhir blok route preview khusus local.
 
 
@@ -107,3 +110,19 @@ Route::get('/beasiswa/{slug}', ScholarshipDetailController::class)
 
 Route::inertia('/fitur', 'Mentora/Features/Index')
     ->name('features.index');
+
+/*
+|--------------------------------------------------------------------------
+| Event Routes
+|--------------------------------------------------------------------------
+| Halaman daftar dan detail Event MENTORA.
+| Dapat diakses tanpa login.
+*/
+
+// Daftar Event.
+Route::get('/event', EventCatalogController::class)
+    ->name('events.index');
+
+// Detail Event berdasarkan slug.
+Route::get('/event/{slug}', EventDetailController::class)
+    ->name('events.show');
