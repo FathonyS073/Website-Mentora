@@ -65,7 +65,12 @@ const samples = [
                     PREVIEW LOKAL — Seluruh program di bawah adalah data contoh UI, bukan beasiswa sebenarnya.
                 </div>
                 <h1 class="text-2xl font-extrabold text-mentora-navy">Preview Kartu Beasiswa MENTORA</h1>
-                <ScholarshipCard v-for="item in samples" :key="item.id" :scholarship="item" />
+                <ScholarshipCard
+                    v-for="item in samples"
+                    :key="item.id"
+                    :scholarship="item"
+                    :preview="true"
+                />
             </div>
         </section>
     </PublicLayout>

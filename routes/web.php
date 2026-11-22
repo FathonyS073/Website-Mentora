@@ -13,6 +13,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 
+/**
+ * Route preview khusus lingkungan development.
+ * Tidak tersedia ketika APP_ENV=production.
+ */
+if (app()->environment('local')) {
+
+    // Preview tampilan navbar, layout, dan footer.
+    Route::inertia(
+        '/ui-preview/public',
+        'Mentora/PublicLayoutPreview'
+    )->name('ui-preview.public');
+
+    // Preview kartu beasiswa.
+    Route::inertia(
+        '/ui-preview/scholarship-cards',
+        'Mentora/Scholarships/CardPreview'
+    )->name('ui-preview.scholarship-cards');
+
+    // Route preview detail beasiswa yang sudah ada
+    // harus berada di dalam blok ini.
+
+
 
 /**
  * Preview lokal halaman Detail Beasiswa.
@@ -73,6 +95,7 @@ Route::get('/ui-preview/scholarship-detail', function () {
         ]
     );
 })->name('ui-preview.scholarship-detail');
+} // Akhir blok route preview khusus local.
 
 
 Route::get('/beasiswa', ScholarshipCatalogController::class)

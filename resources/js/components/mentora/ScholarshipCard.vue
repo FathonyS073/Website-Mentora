@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 import { Bookmark, CalendarDays, ExternalLink, GraduationCap, MapPin } from 'lucide-vue-next';
 
 interface ScholarshipItem {
@@ -16,7 +17,22 @@ interface ScholarshipItem {
     source_url?: string | null;
 }
 
-const props = defineProps<{ scholarship: ScholarshipItem }>();
+
+const props = defineProps<{
+    scholarship: ScholarshipItem;
+    preview?: boolean;
+}>();
+
+// Preview diarahkan ke halaman contoh lokal.
+// Kartu asli diarahkan ke halaman detail berdasarkan slug.
+const detailHref = computed(() => {
+    if (props.preview) {
+        return '/ui-preview/scholarship-detail';
+    }
+
+    return `/beasiswa/${encodeURIComponent(props.scholarship.slug)}`;
+});
+
 
 function dateOnly(value?: string | null): string | null {
     if (!value) return null;
@@ -137,12 +153,42 @@ const safeSource = computed(() => {
         </div>
 
         <div class="flex flex-col gap-2 border-t border-mentora-border pt-4 lg:border-l lg:border-t-0 lg:py-2 lg:pl-4">
+        <!-- Navigasi menuju halaman detail beasiswa -->
+        <Link
+            :href="detailHref"
+            class="inline-flex min-h-10 items-center
+                justify-center gap-2 rounded-xl
+                bg-mentora-primary px-3
+                text-xs font-semibold text-white
+                transition hover:bg-mentora-primary-hover
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-mentora-primary"
+            :aria-label="`Lihat detail ${scholarship.title}`"
+        >
+            {{ preview ? 'Detail Contoh' : 'Lihat Detail' }}
+
+            <ArrowRight
+                :size="14"
+                aria-hidden="true"
+            />
+        </Link>
+
             <a
                 v-if="safeSource"
                 :href="safeSource"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-mentora-primary px-3 text-xs font-semibold text-white transition hover:bg-mentora-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mentora-primary"
+                class="inline-flex min-h-10 items-center
+                        justify-center gap-2 rounded-xl
+                        border border-mentora-border
+                        bg-white px-3 text-xs font-semibold
+                        text-mentora-navy transition
+                        hover:border-mentora-primary
+                        hover:bg-indigo-50
+                        focus-visible:outline-2
+                        focus-visible:outline-offset-2
+                        focus-visible:outline-mentora-primary"
                 :aria-label="`Buka sumber resmi untuk ${scholarship.title} di tab baru`"
             >
                 Sumber Resmi <ExternalLink :size="14" aria-hidden="true" />
