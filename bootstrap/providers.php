@@ -11,4 +11,5 @@ return [
     FortifyServiceProvider::class,
     IdentityServiceProvider::class,
     ScholarshipServiceProvider::class,
+    App\Modules\Event\EventServiceProvider::class,
 ];
