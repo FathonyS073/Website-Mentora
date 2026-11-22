@@ -104,3 +104,6 @@ Route::get('/beasiswa', ScholarshipCatalogController::class)
     // Halaman detail beasiswa untuk pengunjung publik.
 Route::get('/beasiswa/{slug}', ScholarshipDetailController::class)
     ->name('scholarships.show');
+
+Route::inertia('/fitur', 'Mentora/Features/Index')
+    ->name('features.index');

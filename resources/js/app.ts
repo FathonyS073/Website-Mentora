@@ -21,6 +21,7 @@ void createInertiaApp({
             case name === 'Mentora/Scholarships/Index':
             case name === 'Mentora/Scholarships/CardPreview':
             case name === 'Mentora/Scholarships/Show':
+            case name === 'Mentora/Features/Index':
 
 
                 return null;

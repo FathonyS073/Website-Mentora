@@ -12,7 +12,7 @@ const menuOpen = ref(false);
 const navigation = [
     { label: 'Beranda', href: '/', enabled: true },
     { label: 'Beasiswa', href: '/beasiswa', enabled: true },
-    { label: 'Fitur', href: '/fitur', enabled: false },
+    { label: 'Fitur', href: '/fitur', enabled: true },
     { label: 'Event', href: '/event', enabled: false },
     { label: 'Artikel', href: '/artikel', enabled: false },
     { label: 'Tentang', href: '/tentang', enabled: false },
