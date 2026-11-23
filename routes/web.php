@@ -5,6 +5,8 @@ use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipCatalogCont
 use App\Modules\Scholarship\Presentation\Http\Controllers\ScholarshipDetailController;
 use App\Modules\Event\Presentation\Http\Controllers\EventCatalogController;
 use App\Modules\Event\Presentation\Http\Controllers\EventDetailController;
+use App\Modules\Article\Presentation\Http\Controllers\ArticleCatalogController;
+use App\Modules\Article\Presentation\Http\Controllers\ArticleDetailController;
 
 
 Route::inertia('/', 'Mentora/Home')->name('home');
@@ -192,3 +194,8 @@ Route::get('/event', EventCatalogController::class)
 // Detail Event berdasarkan slug.
 Route::get('/event/{slug}', EventDetailController::class)
     ->name('events.show');
+Route::get('/artikel', ArticleCatalogController::class)
+    ->name('articles.index');
+
+Route::get('/artikel/{slug}', ArticleDetailController::class)
+    ->name('articles.show');

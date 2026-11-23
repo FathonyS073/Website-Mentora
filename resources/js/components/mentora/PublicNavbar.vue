@@ -14,7 +14,7 @@ const navigation = [
     { label: 'Beasiswa', href: '/beasiswa', enabled: true },
     { label: 'Fitur', href: '/fitur', enabled: true },
     { label: 'Event', href: '/event', enabled: true },
-    { label: 'Artikel', href: '/artikel', enabled: false },
+    { label: 'Artikel', href: '/artikel', enabled: true },
     { label: 'Tentang', href: '/tentang', enabled: false },
 ] as const;
 
