@@ -48,7 +48,10 @@ function safeCoverPath(path?: string | null): string | null {
 }
 
 const coverUrl = computed(() => safeCoverPath(props.article.cover_image_path));
-const detailUrl = computed(() => `/artikel/${encodeURIComponent(props.article.slug)}`);
+const detailUrl = computed(() => props.preview
+    ? `/ui-preview/article-detail/${encodeURIComponent(props.article.slug)}`
+    : `/artikel/${encodeURIComponent(props.article.slug)}`
+);
 
 const categoryIcon = computed(() => {
     const category = props.article.category.toLowerCase();
@@ -115,14 +118,12 @@ const publishDate = computed(() => {
                     {{ publishDate }}
                 </span>
                 <Link
-                    v-if="!preview"
                     :href="detailUrl"
                     :aria-label="`Baca artikel ${article.title}`"
                     class="inline-flex items-center gap-1 text-sm font-bold text-mentora-primary transition hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mentora-primary"
                 >
-                    Baca <ArrowUpRight :size="17" aria-hidden="true" />
+                    {{ preview ? 'Baca Contoh' : 'Baca' }} <ArrowUpRight :size="17" aria-hidden="true" />
                 </Link>
-                <span v-else class="text-xs font-semibold text-mentora-primary">Contoh desain</span>
             </div>
         </div>
     </article>
