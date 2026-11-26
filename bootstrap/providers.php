@@ -14,4 +14,5 @@ return [
     App\Modules\Event\EventServiceProvider::class,
     App\Modules\Article\ArticleServiceProvider::class,
     App\Modules\Identity\RbacServiceProvider::class,
+    App\Modules\Identity\RegistrationRoleServiceProvider::class,
 ];

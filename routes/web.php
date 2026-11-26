@@ -202,3 +202,4 @@ Route::get('/artikel/{slug}', ArticleDetailController::class)
 Route::inertia('/tentang', 'Mentora/About')->name('about');
 
 require __DIR__ . '/mentora-article-preview.php';
+require __DIR__ . '/mentora-member-dashboard.php';
