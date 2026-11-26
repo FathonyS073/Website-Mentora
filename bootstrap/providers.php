@@ -13,4 +13,5 @@ return [
     ScholarshipServiceProvider::class,
     App\Modules\Event\EventServiceProvider::class,
     App\Modules\Article\ArticleServiceProvider::class,
+    App\Modules\Identity\RbacServiceProvider::class,
 ];
