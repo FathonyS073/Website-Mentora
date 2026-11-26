@@ -199,5 +199,6 @@ Route::get('/artikel', ArticleCatalogController::class)
 
 Route::get('/artikel/{slug}', ArticleDetailController::class)
     ->name('articles.show');
+Route::inertia('/tentang', 'Mentora/About')->name('about');
 
 require __DIR__ . '/mentora-article-preview.php';

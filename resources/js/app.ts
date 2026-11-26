@@ -27,6 +27,7 @@ void createInertiaApp({
             case name === 'Mentora/Events/CardPreview':
             case name === 'Mentora/Articles/Index':
             case name === 'Mentora/Articles/Show':
+            case name === 'Mentora/About':
                 
 
 

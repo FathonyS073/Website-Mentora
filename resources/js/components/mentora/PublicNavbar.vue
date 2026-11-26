@@ -15,7 +15,7 @@ const navigation = [
     { label: 'Fitur', href: '/fitur', enabled: true },
     { label: 'Event', href: '/event', enabled: true },
     { label: 'Artikel', href: '/artikel', enabled: true },
-    { label: 'Tentang', href: '/tentang', enabled: false },
+    { label: 'Tentang', href: '/tentang', enabled: true },
 ] as const;
 
 function isActive(href: string): boolean {
