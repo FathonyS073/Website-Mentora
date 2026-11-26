@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Form, Head } from '@inertiajs/vue3';
-import { ArrowRight, LockKeyhole, Mail, ShieldCheck, UserRound } from 'lucide-vue-next';
+import { ArrowRight, GraduationCap, LockKeyhole, Mail, ShieldCheck, UserRound, UsersRound } from 'lucide-vue-next';
 import InputError from '@/components/InputError.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 import TextLink from '@/components/TextLink.vue';
@@ -38,18 +38,70 @@ defineOptions({
         <p
             class="mx-auto mt-3 max-w-[450px] text-sm leading-6 text-[#64708c] sm:text-[15px]"
         >
-            Daftar gratis untuk menjelajahi beasiswa, event, dan sumber belajar
-            yang mendukung perjalanan pendidikanmu.
+            Bergabung sebagai pelajar, mahasiswa, orang tua, atau wali untuk
+            mempersiapkan perjalanan pendidikan bersama MENTORA.
         </p>
     </div>
 
-    <!-- Endpoint POST dan kontrak field pendaftaran bawaan Fortify tidak diubah. -->
+    <!-- Endpoint POST Fortify tetap sama. Backend hanya menerima dua jenis akun publik. -->
     <Form
         v-bind="store.form()"
         :reset-on-success="['password', 'password_confirmation']"
         v-slot="{ errors, processing }"
         class="flex flex-col gap-5"
     >
+        <!-- Pilihan jenis akun publik: role internal tidak boleh ditawarkan di sini. -->
+        <fieldset class="grid gap-3">
+            <legend class="mb-2 text-sm font-semibold text-[#192443]">
+                Daftar Sebagai <span class="text-[#e34a66]">*</span>
+            </legend>
+            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label class="relative cursor-pointer">
+                    <input
+                        type="radio"
+                        name="account_type"
+                        value="member"
+                        checked
+                        required
+                        :tabindex="1"
+                        class="peer sr-only"
+                    />
+                    <span class="flex min-h-[116px] flex-col rounded-xl border border-[#dce2f0] bg-white p-4 transition-colors peer-checked:border-[#313cc8] peer-checked:bg-[#f4f6ff] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#313cc8]">
+                        <span class="mb-2 flex items-center gap-2 text-sm font-bold text-[#192443]">
+                            <GraduationCap aria-hidden="true" class="size-[19px] text-[#313cc8]" />
+                            Pelajar / Mahasiswa
+                        </span>
+                        <span class="text-xs leading-5 text-[#65728f]">
+                            Mencari beasiswa, menyiapkan persyaratan, dan mengelola pendaftaran.
+                        </span>
+                    </span>
+                </label>
+                <label class="relative cursor-pointer">
+                    <input
+                        type="radio"
+                        name="account_type"
+                        value="guardian"
+                        required
+                        :tabindex="1"
+                        class="peer sr-only"
+                    />
+                    <span class="flex min-h-[116px] flex-col rounded-xl border border-[#dce2f0] bg-white p-4 transition-colors peer-checked:border-[#313cc8] peer-checked:bg-[#f4f6ff] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#313cc8]">
+                        <span class="mb-2 flex items-center gap-2 text-sm font-bold text-[#192443]">
+                            <UsersRound aria-hidden="true" class="size-[19px] text-[#313cc8]" />
+                            Orang Tua / Wali
+                        </span>
+                        <span class="text-xs leading-5 text-[#65728f]">
+                            Mendampingi Member setelah mendapatkan izin yang sesuai.
+                        </span>
+                    </span>
+                </label>
+            </div>
+            <InputError :message="errors.account_type" />
+            <p class="text-xs leading-5 text-[#8190aa]">
+                Jenis akun menentukan fitur yang dapat digunakan. Akun staf MENTORA dibuat melalui undangan resmi.
+            </p>
+        </fieldset>
+
         <!-- Nama lengkap -->
         <div class="grid gap-2">
             <Label for="name" class="text-sm font-semibold text-[#192443]">
@@ -66,7 +118,7 @@ defineOptions({
                     name="name"
                     required
                     v-focus
-                    :tabindex="1"
+                    :tabindex="2"
                     autocomplete="name"
                     maxlength="255"
                     placeholder="Masukkan nama lengkap"
@@ -92,7 +144,7 @@ defineOptions({
                     type="email"
                     name="email"
                     required
-                    :tabindex="2"
+                    :tabindex="3"
                     autocomplete="email"
                     maxlength="255"
                     placeholder="Masukkan alamat email"
@@ -117,7 +169,7 @@ defineOptions({
                     id="password"
                     name="password"
                     required
-                    :tabindex="3"
+                    :tabindex="4"
                     autocomplete="new-password"
                     placeholder="Buat kata sandi yang kuat"
                     :passwordrules="passwordRules"
@@ -145,7 +197,7 @@ defineOptions({
                     id="password_confirmation"
                     name="password_confirmation"
                     required
-                    :tabindex="4"
+                    :tabindex="5"
                     autocomplete="new-password"
                     placeholder="Ulangi kata sandi"
                     :passwordrules="passwordRules"
@@ -168,7 +220,7 @@ defineOptions({
         <Button
             type="submit"
             :disabled="processing"
-            :tabindex="5"
+            :tabindex="6"
             data-test="register-user-button"
             class="mt-1 h-12 w-full rounded-xl bg-[#313cc8] text-[15px] font-bold text-white shadow-[0_9px_22px_rgba(49,60,200,0.17)] transition-colors hover:bg-[#2734b1] focus-visible:ring-[#4b57e0]/40 disabled:opacity-70"
         >
@@ -190,7 +242,7 @@ defineOptions({
             Masuk untuk melanjutkan perjalananmu.
             <TextLink
                 :href="login()"
-                :tabindex="6"
+                :tabindex="7"
                 class="ml-1 font-bold text-[#3544cc] hover:text-[#2633a5] hover:underline"
             >
                 Masuk

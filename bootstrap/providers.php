@@ -15,4 +15,5 @@ return [
     App\Modules\Article\ArticleServiceProvider::class,
     App\Modules\Identity\RbacServiceProvider::class,
     App\Modules\Identity\RegistrationRoleServiceProvider::class,
+    App\Modules\Identity\SuperAdminBootstrapServiceProvider::class,
 ];
