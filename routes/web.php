@@ -204,3 +204,6 @@ require __DIR__.'/mentora-article-preview.php';
 
 // Route /member/dashboard tetap menggunakan middleware auth + verified + RBAC.
 require __DIR__.'/mentora-member-dashboard.php';
+
+require __DIR__ . '/mentora-member-dashboard.php';
+require __DIR__ . '/mentora-superadmin-staff.php';
